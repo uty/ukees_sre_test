@@ -4,10 +4,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends gcc build-essen
 
 WORKDIR /tmp
 COPY hello.c .
-RUN gcc -o helloworld hello.c
+RUN gcc -shared -o libhello.so -fPIC hello.c
 
-FROM python:3.8-slim-buster
+FROM python:3.9-slim-buster
 
-COPY --from=compile-step /tmp/hellowolrd .
+WORKDIR /app
+COPY --from=compile-step /tmp/libhello.so .
+COPY hello.py .
 
-CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD ["python3", "hello.py"]
