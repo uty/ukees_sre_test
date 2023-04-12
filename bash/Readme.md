@@ -4,7 +4,7 @@ This bash script performs a network health check by pinging a list of hosts and 
 
 ## Usage
 
-```
+```bash
 ./scan_hosts.sh -f hosts_file -f FILE -o OUTPUT [-c COUNT] [-i INTERVAL]
 ```
 
@@ -18,7 +18,7 @@ This bash script performs a network health check by pinging a list of hosts and 
 
 ## Example
 Example host list
-```
+```bash
 ❯ cat test_host_list
 8.8.8.8
 youtube.com
@@ -27,7 +27,7 @@ youtube.com
 ```
 
 Run result
-```
+```bash
 ❯ ./scan_hosts.sh -f test_host_list -o test_out
 Pinging host: 8.8.8.8... OK
 Pinging host: youtube.com... OK
