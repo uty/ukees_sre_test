@@ -1,6 +1,6 @@
 
 def handler(event, context):
-    bucket = event['detail']['requestParameters']['bucket_name']
+    bucket = event['detail']['requestParameters']['bucketName']
 
     print(f'Bucket created: {bucket}')
 
