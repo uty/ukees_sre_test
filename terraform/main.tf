@@ -22,13 +22,14 @@ provider "archive" {}
 module "lambda" {
   source = "./modules/lambda"
 
-  name             = "test_lambda"
-  source_code_file = "../python/on_bucket_create/main.py"
-  handler          = "handler"
+  name             = var.lambda_name
+  source_code_file = var.lambda_source_file
+  handler          = var.lambda_handler_function
 }
 
 module "api_gateway" {
   source = "./modules/api_gateway"
 
+  name              = var.api_gateway_name
   lambda_invoke_arn = module.lambda.invoke_arn
 }
