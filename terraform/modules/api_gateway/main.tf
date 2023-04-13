@@ -3,6 +3,13 @@ resource "aws_api_gateway_rest_api" "rest_api" {
   description = var.description
 }
 
+resource "aws_lambda_permission" "lambda_permission" {
+  action        = "lambda:InvokeFunction"
+  function_name = var.lambda_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn = "${aws_api_gateway_rest_api.rest_api.execution_arn}/*"
+}
+
 resource "aws_api_gateway_resource" "resource" {
   rest_api_id = aws_api_gateway_rest_api.rest_api.id
   parent_id   = aws_api_gateway_rest_api.rest_api.root_resource_id
@@ -27,6 +34,7 @@ resource "aws_api_gateway_integration" "integration" {
 }
 
 resource "aws_api_gateway_deployment" "deployment" {
+  depends_on = [aws_api_gateway_method.method]
   rest_api_id = aws_api_gateway_rest_api.rest_api.id
   stage_name  = "test"
 }

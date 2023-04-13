@@ -31,5 +31,6 @@ module "api_gateway" {
   source = "./modules/api_gateway"
 
   name              = var.api_gateway_name
+  lambda_name       = var.lambda_name
   lambda_invoke_arn = module.lambda.invoke_arn
 }

@@ -3,6 +3,11 @@ variable "lambda_invoke_arn" {
   type        = string
 }
 
+variable "lambda_name" {
+  description = "Lambda name"
+  type        = string
+}
+
 variable "name" {
   description = "API gateway name"
   type        = string
